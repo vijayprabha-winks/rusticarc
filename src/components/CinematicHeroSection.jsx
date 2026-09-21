@@ -1,753 +1,554 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ChevronDown } from 'lucide-react';
-import heroVideo from '../assets/Cinematic_Hero_Video_Prompt_.mp4';
+import { ArrowUpRight, Sparkles } from 'lucide-react';
+import houseImg from '../assets/rustic_hero_house.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function CinematicHeroSection({ isLoaderActive }) {
   const containerRef = useRef(null);
-  const pinTriggerRef = useRef(null);
-  const videoWrapperRef = useRef(null);
-  const videoElementRef = useRef(null);
+  const houseWrapperRef = useRef(null);
+  const houseImgRef = useRef(null);
+  const textBackdropRef = useRef(null);
+  const topRowRef = useRef(null);
+  const bottomRowRef = useRef(null);
+  const hasAnimatedRef = useRef(false);
 
-  // Stage content container references (3 Core Disciplines)
-  const stage1Ref = useRef(null); // Overview: Residential Atelier (0%)
-  const stage2Ref = useRef(null); // Discipline 01: Architecture (50%)
-  const stage3Ref = useRef(null); // Discipline 02: Interior (100% & Finish)
+  // Play the signature GSAP "Jel Shake" (Jelly Bounce) entrance animation
+  const triggerJelShakeAnimation = () => {
+    const house = houseWrapperRef.current;
+    const letters = textBackdropRef.current;
+    const topRow = topRowRef.current;
+    const bottomRow = bottomRowRef.current;
 
-  const hasAnimatedEntrance = useRef(false);
+    if (!house) return;
 
-  // Target time for smooth scroll scrubbing
-  const targetTimeRef = useRef(0);
+    const tl = gsap.timeline();
 
-  // Active scroll stage: 0, 50, or 100
-  const [activeStage, setActiveStage] = useState(0);
+    // 1. Text & UI Entrance (Dramatic staggered fade-in)
+    if (letters) {
+      tl.fromTo(
+        letters,
+        { opacity: 0, y: 40, filter: 'blur(10px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.1, ease: 'power3.out' },
+        0.05
+      );
+    }
 
-  // Jump to specific scroll stage (0%, 50%, or 100%)
-  const handleScrollToStage = (stageVal) => {
-    const heroST = ScrollTrigger.getById ? ScrollTrigger.getById('hero-trigger') : null;
-    if (!heroST) return;
-    const start = heroST.start;
-    const distance = heroST.end - heroST.start;
-    const targetY = start + (stageVal / 100) * distance;
-    window.scrollTo({ top: targetY, behavior: 'smooth' });
+    if (topRow) {
+      tl.fromTo(
+        topRow.children,
+        { opacity: 0, y: -25 },
+        { opacity: 1, y: 0, duration: 0.9, stagger: 0.12, ease: 'power2.out' },
+        0.15
+      );
+    }
+
+    if (bottomRow) {
+      tl.fromTo(
+        bottomRow.children,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power2.out' },
+        0.25
+      );
+    }
+
+    // 2. High-Impact Signature "Jel Shake" Physics for the House (Slow, Majestic Rise)
+    // Origin at bottom center so squash and stretch reacts from the foundation
+    gsap.set(house, { transformOrigin: '50% 100%' });
+
+    // Slow, smooth entrance from down to up (1.8s duration)
+    tl.fromTo(
+      house,
+      {
+        y: 380,
+        scaleY: 1.18,
+        scaleX: 0.86,
+        opacity: 0
+      },
+      {
+        y: -14,
+        scaleY: 0.92,
+        scaleX: 1.08,
+        opacity: 0.82,
+        duration: 1.8,
+        ease: 'power2.out'
+      },
+      0.15
+    )
+      // Wobble stage 1 (Rebound stretch)
+      .to(
+        house,
+        {
+          y: 7,
+          scaleY: 1.06,
+          scaleX: 0.95,
+          duration: 0.35,
+          ease: 'sine.inOut'
+        }
+      )
+      // Wobble stage 2 (Squash return)
+      .to(
+        house,
+        {
+          y: -3,
+          scaleY: 0.97,
+          scaleX: 1.03,
+          duration: 0.28,
+          ease: 'sine.inOut'
+        }
+      )
+      // Wobble stage 3 (Micro settle)
+      .to(
+        house,
+        {
+          y: 1,
+          scaleY: 1.01,
+          scaleX: 0.99,
+          duration: 0.22,
+          ease: 'sine.inOut'
+        }
+      )
+      // Final lock to rest position (semi-transparent so RUSTICARC text shines through)
+      .to(
+        house,
+        {
+          y: 0,
+          scaleY: 1.0,
+          scaleX: 1.0,
+          opacity: 0.82,
+          duration: 0.22,
+          ease: 'power1.out'
+        }
+      );
   };
 
-  // 1. Initial Entrance Animation:
-  // Once the loader finishes, the full-screen cinematic video slides in from the right edge.
+  // Trigger when loader completes
   useEffect(() => {
     if (isLoaderActive) return;
-    if (hasAnimatedEntrance.current) return;
-    hasAnimatedEntrance.current = true;
+    if (hasAnimatedRef.current) return;
+    hasAnimatedRef.current = true;
 
-    const ctx = gsap.context(() => {
-      // Full-screen video container slides in from right side
-      gsap.fromTo(
-        videoWrapperRef.current,
-        {
-          x: '100vw',
-          opacity: 0
-        },
-        {
-          x: '0vw',
-          opacity: 1,
-          duration: 1.4,
-          ease: 'power3.out',
-          delay: 0.1
-        }
-      );
+    // Small delay to ensure smooth layout render after loader unmounts
+    const timer = setTimeout(() => {
+      triggerJelShakeAnimation();
+    }, 80);
 
-      // Stage 1 typography slides in from left into free space
-      gsap.fromTo(
-        stage1Ref.current,
-        {
-          x: -70,
-          opacity: 0
-        },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 1.2,
-          ease: 'power3.out',
-          delay: 0.3
-        }
-      );
-    }, containerRef);
-
-    return () => ctx.revert();
+    return () => clearTimeout(timer);
   }, [isLoaderActive]);
 
-  // 2. High-Performance Hardware-Accelerated Video Scrubbing Engine
-  // Eliminates infinite seek loop and subpixel rasterization jitter during scroll
-  useEffect(() => {
-    const vid = videoElementRef.current;
-    if (!vid) return;
+  // Subtle scroll parallax & hover jelly wobble interaction
+  useGSAP(
+    () => {
+      if (!houseWrapperRef.current || !textBackdropRef.current) return;
 
-    vid.pause();
-    vid.currentTime = 0;
-
-    let isSeeking = false;
-    let lastSoughtTime = 0;
-    let pendingTime = null;
-    let rafId = null;
-
-    const performSeek = (time) => {
-      if (!vid.duration) return;
-      const clamped = Math.max(0, Math.min(time, vid.duration - 0.03));
-      // Only seek if target has shifted by at least ~1 frame (0.025s) to eliminate jitter
-      if (Math.abs(clamped - lastSoughtTime) < 0.025) return;
-
-      if (isSeeking || vid.seeking) {
-        pendingTime = clamped;
-        return;
-      }
-
-      isSeeking = true;
-      lastSoughtTime = clamped;
-      vid.currentTime = clamped;
-    };
-
-    const handleSeeked = () => {
-      isSeeking = false;
-      if (pendingTime !== null) {
-        const next = pendingTime;
-        pendingTime = null;
-        if (Math.abs(next - lastSoughtTime) >= 0.025) {
-          isSeeking = true;
-          lastSoughtTime = next;
-          vid.currentTime = next;
+      // Parallax effect on scroll
+      gsap.to(houseWrapperRef.current, {
+        y: 60,
+        scale: 0.97,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 0.6
         }
-      }
-    };
+      });
 
-    vid.addEventListener('seeked', handleSeeked);
+      gsap.to(textBackdropRef.current, {
+        y: -40,
+        opacity: 0.45,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 0.6
+        }
+      });
+    },
+    { scope: containerRef }
+  );
 
-    const renderLoop = () => {
-      if (vid.readyState >= 2) {
-        performSeek(targetTimeRef.current);
-      }
-      rafId = requestAnimationFrame(renderLoop);
-    };
-
-    rafId = requestAnimationFrame(renderLoop);
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      vid.removeEventListener('seeked', handleSeeked);
-    };
-  }, []);
-
-  const handleLoadedMetadata = () => {
-    const video = videoElementRef.current;
-    if (video) {
-      video.pause();
-      video.currentTime = 0;
-      ScrollTrigger.refresh();
-    }
+  // Interactive house hover jelly wobble
+  const handleHouseHover = () => {
+    if (!houseWrapperRef.current) return;
+    gsap.killTweensOf(houseWrapperRef.current);
+    gsap.timeline()
+      .to(houseWrapperRef.current, {
+        scaleY: 0.95,
+        scaleX: 1.05,
+        opacity: 0.88,
+        duration: 0.18,
+        ease: 'power1.out'
+      })
+      .to(houseWrapperRef.current, {
+        scaleY: 1.04,
+        scaleX: 0.97,
+        duration: 0.22,
+        ease: 'sine.inOut'
+      })
+      .to(houseWrapperRef.current, {
+        scaleY: 1.0,
+        scaleX: 1.0,
+        opacity: 0.78,
+        duration: 0.25,
+        ease: 'elastic.out(1.2, 0.4)'
+      });
   };
 
-  // 3. GSAP ScrollTrigger 3-Stage Orchestration (0: Overview -> 50: Architecture -> 100: Interior & Video Finish)
-  useGSAP(() => {
-    if (!pinTriggerRef.current) return;
-
-    const s1 = stage1Ref.current;
-    const s2 = stage2Ref.current;
-    const s3 = stage3Ref.current;
-    const vid = videoElementRef.current;
-
-    // Master Scroll Timeline pinned for exactly 3 scrolls (+=1500px: 0 -> 50 -> 100)
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        id: 'hero-trigger',
-        trigger: pinTriggerRef.current,
-        pin: true,
-        start: 'top top',
-        end: '+=1500',
-        scrub: 0.5,
-        anticipatePin: 0
-      },
-      onUpdate: () => {
-        const p = tl.progress();
-        const dur = (vid && vid.duration) ? vid.duration : 0;
-
-        // Smoothly map scrubbed timeline progress to video playback time
-        // At 100% progress (p >= 0.99), video completes to the final frame
-        if (dur > 0) {
-          const target = p >= 0.99 ? Math.max(0, dur - 0.02) : Math.min(p * dur, Math.max(0, dur - 0.02));
-          targetTimeRef.current = target;
-        }
-
-        // Active stage tracking for 0, 50, 100
-        if (p < 0.35) {
-          setActiveStage(0);
-        } else if (p < 0.75) {
-          setActiveStage(50);
-        } else {
-          setActiveStage(100);
-        }
-      }
-    });
-
-    // Total duration: 10.0s mapped across 3 scrolls (+=1500px)
-    // =========================================================================
-    // STAGE 1 (0%): Overview (0.0s - 2.4s)
-    // Visible at scroll 0, then smoothly exits to the left
-    // =========================================================================
-    tl.to(s1, { opacity: 0, x: -70, duration: 1.4, ease: 'power2.inOut' }, 2.4);
-
-    // =========================================================================
-    // STAGE 2 (50%): Architecture (enters 3.6s, centered at 5.0s = 50%, exits 5.8s)
-    // Peak alignment and visibility at 50% scroll
-    // =========================================================================
-    tl.fromTo(
-      s2,
-      { opacity: 0, x: 70 },
-      { opacity: 1, x: 0, duration: 1.2, ease: 'power2.out' },
-      3.6
-    );
-    tl.to(s2, { opacity: 0, x: 70, duration: 1.2, ease: 'power2.inOut' }, 5.8);
-
-    // =========================================================================
-    // STAGE 3 (100%): Interior (enters 7.0s, locked and fully visible through 10.0s)
-    // At 100% scroll: Video completes and finishes
-    // =========================================================================
-    tl.fromTo(
-      s3,
-      { opacity: 0, x: -70 },
-      { opacity: 1, x: 0, duration: 1.2, ease: 'power2.out' },
-      7.0
-    );
-
-    // Dummy spacer tween to guarantee timeline duration stays at 10.0s
-    tl.to({}, { duration: 1.8 }, 8.2);
-
-  }, { scope: containerRef });
-
-  // Enhanced multi-layer high-contrast shadow (micro-outline + deep ambient diffusion)
-  const textGlow = '0 1px 2px #000, 0 2px 8px rgba(0, 0, 0, 0.98), 0 4px 24px rgba(0, 0, 0, 0.95), 0 0 50px rgba(0, 0, 0, 0.9)';
+  const scrollToAbout = (e) => {
+    e.preventDefault();
+    const target = document.getElementById('about');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <section
       ref={containerRef}
       id="cinematic-hero-section"
       data-section="home"
-      style={{ position: 'relative', background: '#06070a' }}
+      style={{
+        position: 'relative',
+        width: '100%',
+        minHeight: '100vh',
+        backgroundColor: '#09090b',
+        color: '#f4f4f5',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        overflow: 'hidden',
+        paddingTop: 'clamp(80px, 11vh, 120px)',
+        paddingBottom: 'clamp(20px, 3vh, 32px)',
+        boxSizing: 'border-box'
+      }}
     >
       <div id="home" style={{ position: 'absolute', top: 0, left: 0, width: 0, height: 0, pointerEvents: 'none' }} />
-      <div id="cinematic-hero" style={{ position: 'absolute', top: 0, left: 0, width: 0, height: 0, pointerEvents: 'none' }} />
-      
-      {/* ScrollTrigger Pin Target */}
+
+      {/* Subtle architectural radial lighting behind the house */}
       <div
-        ref={pinTriggerRef}
         style={{
-          height: '100vh',
-          width: '100%',
+          position: 'absolute',
+          bottom: '5%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: 'clamp(350px, 70vw, 900px)',
+          height: 'clamp(200px, 45vh, 500px)',
+          background: 'radial-gradient(ellipse at center, rgba(217, 119, 6, 0.14) 0%, rgba(20, 20, 24, 0) 70%)',
+          pointerEvents: 'none',
+          zIndex: 1
+        }}
+      />
+
+      {/* ===================================================================
+          1. TOP ROW: Architectural Statement, Metrics & Philosophy
+         =================================================================== */}
+      <div
+        ref={topRowRef}
+        style={{
           position: 'relative',
-          overflow: 'hidden',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
+          zIndex: 10,
+          width: '100%',
+          maxWidth: '1440px',
+          margin: '0 auto',
+          padding: '0 clamp(20px, 4vw, 56px)',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+          gap: 'clamp(24px, 4vw, 48px)',
+          alignItems: 'start',
+          boxSizing: 'border-box'
         }}
       >
-        {/* ===================================================================
-            FULL SCREEN CINEMATIC VIDEO (Plays strictly on scroll via scrub)
-           =================================================================== */}
-        <div
-          ref={videoWrapperRef}
-          style={{
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100vh',
-            overflow: 'hidden',
-            zIndex: 1
-          }}
-        >
-          <video
-            ref={videoElementRef}
-            src={heroVideo}
-            muted
-            playsInline
-            preload="auto"
-            onLoadedMetadata={handleLoadedMetadata}
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              display: 'block',
-              pointerEvents: 'none'
-            }}
-          />
-
-          {/* Directional Vignettes ensuring text clarity while maximizing video vibrancy */}
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              background:
-                'linear-gradient(90deg, rgba(3, 4, 7, 0.78) 0%, rgba(3, 4, 7, 0.42) 36%, transparent 52%, rgba(3, 4, 7, 0.42) 68%, rgba(3, 4, 7, 0.8) 100%), linear-gradient(180deg, rgba(3, 4, 7, 0.6) 0%, transparent 22%, transparent 72%, rgba(3, 4, 7, 0.85) 100%)',
-              pointerEvents: 'none'
-            }}
-          />
-        </div>
-
-        {/* ===================================================================
-            STAGE 1 (0.0s - 2.2s): "RUSTIC ARC" (Overview)
-           =================================================================== */}
-        <div
-          ref={stage1Ref}
-          style={{
-            position: 'absolute',
-            left: 'clamp(16px, 3.5vw, max(36px, calc((100vw - 1380px) / 2)))',
-            width: 'clamp(280px, 90vw, 620px)',
-            maxWidth: 'calc(100vw - 32px)',
-            zIndex: 10,
-            opacity: 1,
-            pointerEvents: 'auto'
-          }}
-        >
-          {/* Architectural Index Header */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              marginBottom: '16px',
-              fontFamily: 'var(--font-mono)',
-              fontSize: 'clamp(0.72rem, 1.1vw, 0.8rem)',
-              letterSpacing: '0.16em',
-              color: '#9cdd2e',
-              textShadow: textGlow
-            }}
-          >
-            <span style={{ fontWeight: 800 }}>// 01</span>
-            <span style={{ width: '32px', height: '1px', background: '#9cdd2e' }} />
-            <span style={{ fontWeight: 700 }}>RESIDENTIAL ARCHITECTURAL ATELIER</span>
-          </div>
-
-          {/* Grand Brand Headline */}
-          <h1
-            style={{
-              fontFamily: "'Cinzel', 'Cormorant Garamond', Georgia, serif",
-              fontSize: 'clamp(2.4rem, 6.4vw, 5.4rem)',
-              fontWeight: 800,
-              lineHeight: 1.0,
-              letterSpacing: 'clamp(0.04em, 1.2vw, 0.14em)',
-              color: '#ffffff',
-              marginBottom: '14px',
-              textShadow: textGlow
-            }}
-          >
-            RUSTIC <span style={{ color: '#9cdd2e', textShadow: '0 0 35px rgba(156,221,46,0.7)' }}>ARC</span>
-          </h1>
-
-          {/* Editorial Italic Subtitle */}
-          <div
-            style={{
-              fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontStyle: 'italic',
-              fontSize: 'clamp(1.15rem, 2.4vw, 1.85rem)',
-              color: '#ffffff',
-              fontWeight: 600,
-              letterSpacing: '0.04em',
-              lineHeight: 1.3,
-              marginBottom: '14px',
-              textShadow: textGlow
-            }}
-          >
-            Architecture · Interior · Construction
-          </div>
-
-          {/* Editorial Intro Line */}
+        {/* Left Column: Core Design Belief & CTA */}
+        <div style={{ maxWidth: '340px' }}>
           <p
             style={{
-              color: '#ffffff',
-              fontSize: 'clamp(0.9rem, 1.3vw, 1.04rem)',
-              fontWeight: 500,
-              lineHeight: 1.7,
-              maxWidth: '520px',
-              marginBottom: '24px',
-              textShadow: textGlow
+              fontFamily: "'Outfit', 'Plus Jakarta Sans', sans-serif",
+              fontSize: 'clamp(0.85rem, 1.05vw, 0.98rem)',
+              lineHeight: 1.6,
+              color: '#d4d4d8',
+              fontWeight: 400,
+              margin: '0 0 16px 0'
             }}
           >
-            End-to-end design and build excellence — harmonizing structural vision, bespoke interior artistry, and meticulous turnkey construction.
+            We believe in designing spaces that harmonize with their surroundings and reflect the unique personalities of their inhabitants.
           </p>
 
-          {/* Scroll Down Indicator */}
-          <div
+          <a
+            href="#about"
+            onClick={scrollToAbout}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '10px',
-              borderLeft: '2px solid #9cdd2e',
-              padding: '4px 0 4px 10px',
-              color: '#ffffff',
-              fontFamily: 'var(--font-mono)',
-              fontSize: 'clamp(0.7rem, 1vw, 0.8rem)',
-              fontWeight: 700,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              textShadow: textGlow
-            }}
-          >
-            <ChevronDown size={15} color="#9cdd2e" />
-            <span>Three scrolls (0 · 50 · 100) to complete film</span>
-          </div>
-        </div>
-
-        {/* ===================================================================
-            STAGE 2 (3.2s - 6.2s): ARCHITECTURE (Right Side)
-           =================================================================== */}
-        <div
-          ref={stage2Ref}
-          style={{
-            position: 'absolute',
-            right: 'clamp(16px, 3.5vw, max(36px, calc((100vw - 1380px) / 2)))',
-            width: 'clamp(280px, 90vw, 580px)',
-            maxWidth: 'calc(100vw - 32px)',
-            zIndex: 10,
-            opacity: 0,
-            pointerEvents: 'auto'
-          }}
-        >
-          {/* Header */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              marginBottom: '14px',
-              fontFamily: 'var(--font-mono)',
-              fontSize: 'clamp(0.72rem, 1.1vw, 0.8rem)',
-              letterSpacing: '0.16em',
-              color: '#9cdd2e',
-              textShadow: textGlow
-            }}
-          >
-            <span style={{ fontWeight: 800 }}>// 01 · WHAT WE DO</span>
-            <span style={{ width: '32px', height: '1px', background: '#9cdd2e' }} />
-            <span style={{ fontWeight: 700 }}>SPATIAL & FAÇADE VISION</span>
-          </div>
-
-          <h2
-            style={{
-              fontFamily: "'Cinzel', serif",
-              fontSize: 'clamp(2.2rem, 5vw, 4.2rem)',
-              fontWeight: 800,
-              lineHeight: 1.05,
-              letterSpacing: '0.08em',
-              color: '#ffffff',
-              marginBottom: '10px',
-              textShadow: textGlow
-            }}
-          >
-            ARCHITECTURE
-          </h2>
-
-          <div
-            style={{
-              fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontStyle: 'italic',
-              fontSize: 'clamp(1.15rem, 2vw, 1.45rem)',
-              color: '#9cdd2e',
+              gap: '6px',
+              fontFamily: "'Outfit', sans-serif",
+              fontSize: 'clamp(0.82rem, 1vw, 0.92rem)',
               fontWeight: 600,
-              marginBottom: '14px',
-              textShadow: textGlow,
-              lineHeight: 1.4
-            }}
-          >
-            Visionary structural design, sculptural façades, and precision spatial planning.
-          </div>
-
-          <p
-            style={{
               color: '#ffffff',
-              fontSize: 'clamp(0.9rem, 1.2vw, 1.02rem)',
-              fontWeight: 500,
-              lineHeight: 1.65,
-              marginBottom: '20px',
-              textShadow: textGlow
+              textDecoration: 'none',
+              letterSpacing: '0.02em',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.35)',
+              paddingBottom: '2px',
+              transition: 'border-color 0.2s ease, color 0.2s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = '#9cdd2e';
+              e.currentTarget.style.borderColor = '#9cdd2e';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = '#ffffff';
+              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.35)';
             }}
           >
-            We sculpt landmark modern residences featuring iconic cantilevered overhangs, climate-responsive solar louvers, and photorealistic 3D visualization.
-          </p>
-
-          {/* Architectural Capabilities */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'baseline',
-                justifyContent: 'space-between',
-                flexWrap: 'wrap',
-                gap: '6px',
-                padding: '8px 0',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.15)'
-              }}
-            >
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', fontWeight: 800, color: '#9cdd2e', letterSpacing: '0.12em', textShadow: textGlow }}>
-                [ 01 ] FORM & FAÇADE
-              </span>
-              <span style={{ fontSize: 'clamp(0.85rem, 1.1vw, 0.94rem)', color: '#ffffff', fontWeight: 600, textShadow: textGlow }}>
-                Sculptural Cantilevers & Parametric Façades
-              </span>
-            </div>
-
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'baseline',
-                justifyContent: 'space-between',
-                flexWrap: 'wrap',
-                gap: '6px',
-                padding: '8px 0',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.15)'
-              }}
-            >
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', fontWeight: 800, color: '#9cdd2e', letterSpacing: '0.12em', textShadow: textGlow }}>
-                [ 02 ] SPATIAL DYNAMICS
-              </span>
-              <span style={{ fontSize: 'clamp(0.85rem, 1.1vw, 0.94rem)', color: '#ffffff', fontWeight: 600, textShadow: textGlow }}>
-                Solar Orientation & Volumetric Zoning
-              </span>
-            </div>
-
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'baseline',
-                justifyContent: 'space-between',
-                flexWrap: 'wrap',
-                gap: '6px',
-                padding: '8px 0',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.15)'
-              }}
-            >
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', fontWeight: 800, color: '#9cdd2e', letterSpacing: '0.12em', textShadow: textGlow }}>
-                [ 03 ] 3D BIM MODELING
-              </span>
-              <span style={{ fontSize: 'clamp(0.85rem, 1.1vw, 0.94rem)', color: '#ffffff', fontWeight: 600, textShadow: textGlow }}>
-                Photorealistic Elevation & Millimeter Drafting
-              </span>
-            </div>
-          </div>
+            <span>Learn More</span>
+            <ArrowUpRight size={15} />
+          </a>
         </div>
 
-        {/* ===================================================================
-            STAGE 3 (7.2s - 10.0s): INTERIOR (Left Side)
-           =================================================================== */}
-        <div
-          ref={stage3Ref}
-          style={{
-            position: 'absolute',
-            left: 'clamp(16px, 3.5vw, max(36px, calc((100vw - 1380px) / 2)))',
-            width: 'clamp(280px, 90vw, 580px)',
-            maxWidth: 'calc(100vw - 32px)',
-            zIndex: 10,
-            opacity: 0,
-            pointerEvents: 'auto'
-          }}
-        >
-          {/* Header */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              marginBottom: '14px',
-              fontFamily: 'var(--font-mono)',
-              fontSize: 'clamp(0.72rem, 1.1vw, 0.8rem)',
-              letterSpacing: '0.16em',
-              color: '#00f0ff',
-              textShadow: textGlow
-            }}
-          >
-            <span style={{ fontWeight: 800 }}>// 02 · WHAT WE DO</span>
-            <span style={{ width: '32px', height: '1px', background: '#00f0ff' }} />
-            <span style={{ fontWeight: 700 }}>BESPOKE LIVING ENVIRONMENTS</span>
-          </div>
-
-          <h2
-            style={{
-              fontFamily: "'Cinzel', serif",
-              fontSize: 'clamp(2.2rem, 5vw, 4.2rem)',
-              fontWeight: 800,
-              lineHeight: 1.05,
-              letterSpacing: '0.08em',
-              color: '#ffffff',
-              marginBottom: '10px',
-              textShadow: textGlow
-            }}
-          >
-            INTERIOR
-          </h2>
-
-          <div
-            style={{
-              fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontStyle: 'italic',
-              fontSize: 'clamp(1.15rem, 2vw, 1.45rem)',
-              color: '#00f0ff',
-              fontWeight: 600,
-              marginBottom: '14px',
-              textShadow: textGlow,
-              lineHeight: 1.4
-            }}
-          >
-            Bespoke luxury interiors curated with refined materials, custom millwork, and ambient light.
-          </div>
-
-          <p
-            style={{
-              color: '#ffffff',
-              fontSize: 'clamp(0.9rem, 1.2vw, 1.02rem)',
-              fontWeight: 500,
-              lineHeight: 1.65,
-              marginBottom: '20px',
-              textShadow: textGlow
-            }}
-          >
-            Every interior volume is tailored with tactile finishes, seamless architectural cabinetry, and acoustic tranquility designed for refined modern lifestyle.
-          </p>
-
-          {/* Interior Capabilities */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'baseline',
-                justifyContent: 'space-between',
-                flexWrap: 'wrap',
-                gap: '6px',
-                padding: '8px 0',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.15)'
-              }}
-            >
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', fontWeight: 800, color: '#00f0ff', letterSpacing: '0.12em', textShadow: textGlow }}>
-                [ 01 ] MATERIAL CURATION
-              </span>
-              <span style={{ fontSize: 'clamp(0.85rem, 1.1vw, 0.94rem)', color: '#ffffff', fontWeight: 600, textShadow: textGlow }}>
-                Italian Travertine & Fluted Carbon Timber
-              </span>
-            </div>
-
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'baseline',
-                justifyContent: 'space-between',
-                flexWrap: 'wrap',
-                gap: '6px',
-                padding: '8px 0',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.15)'
-              }}
-            >
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', fontWeight: 800, color: '#00f0ff', letterSpacing: '0.12em', textShadow: textGlow }}>
-                [ 02 ] ARTISAN MILLWORK
-              </span>
-              <span style={{ fontSize: 'clamp(0.85rem, 1.1vw, 0.94rem)', color: '#ffffff', fontWeight: 600, textShadow: textGlow }}>
-                Concealed Architecture & Bespoke Joinery
-              </span>
-            </div>
-
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'baseline',
-                justifyContent: 'space-between',
-                flexWrap: 'wrap',
-                gap: '6px',
-                padding: '8px 0',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.15)'
-              }}
-            >
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', fontWeight: 800, color: '#00f0ff', letterSpacing: '0.12em', textShadow: textGlow }}>
-                [ 03 ] LIGHT & HARMONY
-              </span>
-              <span style={{ fontSize: 'clamp(0.85rem, 1.1vw, 0.94rem)', color: '#ffffff', fontWeight: 600, textShadow: textGlow }}>
-                Concealed 2700K Perimeter Cove Ambiance
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* ===================================================================
-            3-SCROLL STAGE INDICATOR: 0 · 50 · 100 (Video Finish)
-           =================================================================== */}
+        {/* Center Column: Impact Metrics */}
         <div
           style={{
-            position: 'absolute',
-            bottom: 'clamp(14px, 3vh, 32px)',
-            right: 'clamp(14px, 3vw, max(36px, calc((100vw - 1380px) / 2)))',
-            zIndex: 20,
             display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            backgroundColor: 'rgba(6, 7, 10, 0.78)',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
-            border: '1px solid rgba(255, 255, 255, 0.12)',
-            padding: '6px 14px',
-            borderRadius: '40px',
-            boxShadow: '0 8px 30px rgba(0, 0, 0, 0.5)'
+            alignItems: 'flex-start',
+            justifyContent: 'center',
+            gap: 'clamp(28px, 4vw, 56px)'
           }}
         >
-          {[
-            { val: 0, label: '0' },
-            { val: 50, label: '50' },
-            { val: 100, label: '100' }
-          ].map((item, idx) => {
-            const isActive = activeStage === item.val;
-            return (
-              <React.Fragment key={item.val}>
-                <button
-                  type="button"
-                  onClick={() => handleScrollToStage(item.val)}
-                  title={`Jump to ${item.val}% (${item.val === 100 ? 'Video Finish' : item.val === 50 ? 'Architecture' : 'Overview'})`}
-                  style={{
-                    background: 'transparent',
-                    border: 'none',
-                    padding: '4px 6px',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    color: isActive ? '#9cdd2e' : '#9ca3af',
-                    fontFamily: 'var(--font-mono, monospace)',
-                    fontSize: '0.78rem',
-                    fontWeight: isActive ? 800 : 600,
-                    letterSpacing: '0.12em',
-                    transition: 'all 0.25s ease'
-                  }}
-                >
-                  <span
-                    style={{
-                      width: '6px',
-                      height: '6px',
-                      borderRadius: '50%',
-                      backgroundColor: isActive ? '#9cdd2e' : 'rgba(255, 255, 255, 0.3)',
-                      boxShadow: isActive ? '0 0 10px #9cdd2e' : 'none',
-                      transition: 'all 0.25s ease'
-                    }}
-                  />
-                  <span>{item.label}</span>
-                </button>
-                {idx < 2 && (
-                  <span
-                    style={{
-                      width: '14px',
-                      height: '1px',
-                      backgroundColor: 'rgba(255, 255, 255, 0.18)'
-                    }}
-                  />
-                )}
-              </React.Fragment>
-            );
-          })}
+          {/* Metric 1 */}
+          <div>
+            <span
+              style={{
+                display: 'block',
+                fontFamily: 'var(--font-mono, monospace)',
+                fontSize: 'clamp(0.68rem, 0.8vw, 0.76rem)',
+                fontWeight: 600,
+                color: '#a1a1aa',
+                letterSpacing: '0.14em',
+                textTransform: 'uppercase',
+                marginBottom: '6px'
+              }}
+            >
+              PROJECTS DONE
+            </span>
+            <span
+              style={{
+                fontFamily: "'Outfit', 'Cinzel', sans-serif",
+                fontSize: 'clamp(2.5rem, 4.2vw, 3.8rem)',
+                fontWeight: 700,
+                lineHeight: 1,
+                color: '#ffffff',
+                letterSpacing: '-0.03em'
+              }}
+            >
+              400+
+            </span>
+          </div>
+
+          {/* Metric 2 */}
+          <div>
+            <span
+              style={{
+                display: 'block',
+                fontFamily: 'var(--font-mono, monospace)',
+                fontSize: 'clamp(0.68rem, 0.8vw, 0.76rem)',
+                fontWeight: 600,
+                color: '#a1a1aa',
+                letterSpacing: '0.14em',
+                textTransform: 'uppercase',
+                marginBottom: '6px'
+              }}
+            >
+              CUSTOMERS WORLDWIDE
+            </span>
+            <span
+              style={{
+                fontFamily: "'Outfit', 'Cinzel', sans-serif",
+                fontSize: 'clamp(2.5rem, 4.2vw, 3.8rem)',
+                fontWeight: 700,
+                lineHeight: 1,
+                color: '#ffffff',
+                letterSpacing: '-0.03em'
+              }}
+            >
+              346K
+            </span>
+          </div>
         </div>
+
+        {/* Right Column: Human-Centered Design Philosophy */}
+        <div style={{ maxWidth: '340px', justifySelf: 'end' }}>
+          <span
+            style={{
+              display: 'block',
+              fontFamily: 'var(--font-mono, monospace)',
+              fontSize: 'clamp(0.72rem, 0.85vw, 0.82rem)',
+              color: '#a1a1aa',
+              letterSpacing: '0.06em',
+              marginBottom: '10px'
+            }}
+          >
+            [human-centered design]
+          </span>
+
+          <p
+            style={{
+              fontFamily: "'Outfit', 'Plus Jakarta Sans', sans-serif",
+              fontSize: 'clamp(0.85rem, 1.05vw, 0.98rem)',
+              lineHeight: 1.6,
+              color: '#d4d4d8',
+              fontWeight: 400,
+              margin: 0
+            }}
+          >
+            A home shaped by your rhythm. Every space is tailored to support your daily rituals, movement, and stillness.
+          </p>
+        </div>
+      </div>
+
+      {/* ===================================================================
+          2. MAIN STAGE: Giant RUSTICARC Serif Backdrop + Jelly-Shaking House
+         =================================================================== */}
+      <div
+        style={{
+          position: 'relative',
+          width: '100%',
+          flex: '1 1 auto',
+          display: 'flex',
+          alignItems: 'flex-end',
+          justifyContent: 'center',
+          minHeight: 'clamp(360px, 58vh, 680px)',
+          marginTop: 'clamp(10px, 2vh, 30px)'
+        }}
+      >
+        {/* Giant Serif Typography: RUSTICARC */}
+        <div
+          ref={textBackdropRef}
+          style={{
+            position: 'absolute',
+            top: '26%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '100%',
+            textAlign: 'center',
+            pointerEvents: 'none',
+            zIndex: 2,
+            userSelect: 'none'
+          }}
+        >
+          <h1
+            style={{
+              margin: 0,
+              fontFamily: "'Playfair Display', 'Cormorant Garamond', Georgia, serif",
+              fontSize: 'clamp(4.6rem, 17.5vw, 18rem)',
+              fontWeight: 700,
+              lineHeight: 0.88,
+              letterSpacing: '-0.015em',
+              color: '#ffffff',
+              textShadow: '0 0 50px rgba(255, 255, 255, 0.35), 0 2px 25px rgba(0, 0, 0, 0.95)',
+              textTransform: 'none',
+              opacity: 1
+            }}
+          >
+            Rusticarc
+          </h1>
+        </div>
+
+        {/* Photorealistic House Cutout with GSAP "Jel Shake" Entrance */}
+        <div
+          ref={houseWrapperRef}
+          onMouseEnter={handleHouseHover}
+          style={{
+            position: 'relative',
+            zIndex: 4,
+            width: 'clamp(340px, 72vw, 1020px)',
+            maxWidth: '96vw',
+            lineHeight: 0,
+            cursor: 'pointer',
+            opacity: 0.78,
+            transition: 'opacity 0.3s ease',
+            willChange: 'transform, opacity'
+          }}
+          title="Click or hover to trigger jel shake!"
+          onClick={triggerJelShakeAnimation}
+        >
+          <img
+            ref={houseImgRef}
+            src={houseImg}
+            alt="Rustic Arc Architectural Scandinavian Pavilion"
+            style={{
+              width: '100%',
+              height: 'auto',
+              display: 'block',
+              filter: 'drop-shadow(0 20px 40px rgba(0, 0, 0, 0.95))',
+              pointerEvents: 'auto'
+            }}
+          />
+        </div>
+      </div>
+
+      {/* ===================================================================
+          3. BOTTOM ROW: Architecture Credits & Interactive Replay Button
+         =================================================================== */}
+      <div
+        ref={bottomRowRef}
+        style={{
+          position: 'relative',
+          zIndex: 10,
+          width: '100%',
+          maxWidth: '1440px',
+          margin: '0 auto',
+          padding: '0 clamp(20px, 4vw, 56px)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          fontFamily: 'var(--font-mono, monospace)',
+          fontSize: 'clamp(0.72rem, 0.85vw, 0.82rem)',
+          color: '#71717a',
+          letterSpacing: '0.08em',
+          boxSizing: 'border-box'
+        }}
+      >
+        <div>[@2026]</div>
+
+        {/* Quick Replay Jelly Entrance Button */}
+        <button
+          type="button"
+          onClick={triggerJelShakeAnimation}
+          style={{
+            background: 'rgba(255, 255, 255, 0.04)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            borderRadius: '20px',
+            padding: '4px 12px',
+            color: '#a1a1aa',
+            fontFamily: 'var(--font-mono, monospace)',
+            fontSize: '0.72rem',
+            cursor: 'pointer',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            transition: 'all 0.2s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = '#9cdd2e';
+            e.currentTarget.style.borderColor = 'rgba(156, 221, 46, 0.5)';
+            e.currentTarget.style.background = 'rgba(156, 221, 46, 0.1)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = '#a1a1aa';
+            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)';
+          }}
+          title="Replay the Jel Shake entrance animation"
+        >
+          <Sparkles size={12} color="#9cdd2e" />
+          <span>Replay Jel Shake</span>
+        </button>
+
+        <div>[trusted architecture firm]</div>
       </div>
     </section>
   );

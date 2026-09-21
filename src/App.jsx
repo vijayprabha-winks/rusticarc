@@ -137,7 +137,7 @@ export default function App() {
         {/* Dedicated 4. PROJECTS Section (Residential & Commercial with Horizontal Photo Gallery) */}
         <ProjectsSection />
 
-        {/* Dedicated 5. CONTACT Section (Dual-card layout & direct WhatsApp integration to 9600815917) */}
+        {/* Dedicated 5. CONTACT Section (Dual-card layout & direct WhatsApp integration to 7825915899) */}
         <ContactSection />
 
         {/* 6. Cinematic Architectural FOOTER Section */}

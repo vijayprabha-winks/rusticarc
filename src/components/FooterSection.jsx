@@ -41,7 +41,7 @@ export default function FooterSection() {
         window.scrollTo({ top: targetY, behavior: 'smooth' });
       }
     } else {
-      window.open('https://wa.me/919600815917?text=Hello%20Rustic%20Arc!%20I%20would%20like%20to%20consult%20regarding%20an%20architectural%20project.', '_blank');
+      window.open('https://wa.me/917825915899?text=Hello%20Rustic%20Arc!%20I%20would%20like%20to%20consult%20regarding%20an%20architectural%20project.', '_blank');
     }
   };
 

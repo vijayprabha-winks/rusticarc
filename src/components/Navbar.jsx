@@ -442,7 +442,7 @@ export default function Navbar({ onReplayLoader }) {
           {/* Bottom Direct Action & WhatsApp Contact */}
           <div style={{ marginTop: 'auto', paddingTop: '28px' }}>
             <a
-              href="https://wa.me/919600815917?text=Hello%20Rustic%20Arc!%20I%20would%20like%20to%20consult%20regarding%20an%20architectural%20project."
+              href="https://wa.me/917825915899?text=Hello%20Rustic%20Arc!%20I%20would%20like%20to%20consult%20regarding%20an%20architectural%20project."
               target="_blank"
               rel="noopener noreferrer"
               style={{

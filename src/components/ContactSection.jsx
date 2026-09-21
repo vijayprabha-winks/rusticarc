@@ -51,7 +51,7 @@ export default function ContactSection() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   // WhatsApp number specified by user
-  const WHATSAPP_NUMBER = '9600815917';
+  const WHATSAPP_NUMBER = '7825915899';
 
   // Handle Input Changes
   const handleChange = (e) => {
@@ -959,10 +959,10 @@ export default function ContactSection() {
 
                     <div>
                       <div style={{ fontSize: '0.82rem', color: '#9ca3af', fontWeight: 600, letterSpacing: '0.04em', marginBottom: '2px' }}>
-                        Studio Location
+                        Office Location
                       </div>
                       <div style={{ fontSize: '0.96rem', color: '#ffffff', fontWeight: 600, lineHeight: 1.5 }}>
-                        51/3, Vallalar Nagar, Villankurichi,<br />Coimbatore - 641035
+                        51/3, 1st Street, TNagar,<br />Chennai - 600028
                       </div>
                     </div>
                   </div>
