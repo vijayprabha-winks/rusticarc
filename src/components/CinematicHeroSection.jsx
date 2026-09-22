@@ -296,8 +296,8 @@ export default function CinematicHeroSection({ isLoaderActive }) {
               transition: 'border-color 0.2s ease, color 0.2s ease'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.color = '#9cdd2e';
-              e.currentTarget.style.borderColor = '#9cdd2e';
+              e.currentTarget.style.color = '#CAB796';
+              e.currentTarget.style.borderColor = '#CAB796';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.color = '#ffffff';
@@ -453,7 +453,7 @@ export default function CinematicHeroSection({ isLoaderActive }) {
               opacity: 1
             }}
           >
-            Rusticarc
+            RusticARc
           </h1>
         </div>
 
@@ -533,9 +533,9 @@ export default function CinematicHeroSection({ isLoaderActive }) {
             transition: 'all 0.2s ease'
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.color = '#9cdd2e';
-            e.currentTarget.style.borderColor = 'rgba(156, 221, 46, 0.5)';
-            e.currentTarget.style.background = 'rgba(156, 221, 46, 0.1)';
+            e.currentTarget.style.color = '#CAB796';
+            e.currentTarget.style.borderColor = 'rgba(202, 183, 150, 0.5)';
+            e.currentTarget.style.background = 'rgba(202, 183, 150, 0.1)';
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.color = '#a1a1aa';
@@ -544,7 +544,7 @@ export default function CinematicHeroSection({ isLoaderActive }) {
           }}
           title="Replay the Jel Shake entrance animation"
         >
-          <Sparkles size={12} color="#9cdd2e" />
+          <Sparkles size={12} color="#CAB796" />
           <span>Replay Jel Shake</span>
         </button>
 

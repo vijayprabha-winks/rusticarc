@@ -276,7 +276,7 @@ export default function FooterSection() {
                     display: 'inline-block',
                     width: '42px',
                     height: '2px',
-                    backgroundColor: '#9cdd2e'
+                    backgroundColor: '#CAB796'
                   }}
                 />
               </div>
@@ -301,8 +301,8 @@ export default function FooterSection() {
                   className="footer-headline-word"
                   style={{
                     display: 'inline-block',
-                    color: '#9cdd2e',
-                    textShadow: '0 0 40px rgba(156, 221, 46, 0.35)'
+                    color: '#CAB796',
+                    textShadow: '0 0 40px rgba(202, 183, 150, 0.35)'
                   }}
                 >
                   HERE.
@@ -347,8 +347,8 @@ export default function FooterSection() {
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = 'translateY(-3px) scale(1.03)';
-                    e.currentTarget.style.boxShadow = '0 12px 35px rgba(156, 221, 46, 0.35)';
-                    e.currentTarget.style.backgroundColor = '#9cdd2e';
+                    e.currentTarget.style.boxShadow = '0 12px 35px rgba(202, 183, 150, 0.35)';
+                    e.currentTarget.style.backgroundColor = '#CAB796';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'translateY(0) scale(1)';
@@ -394,15 +394,15 @@ export default function FooterSection() {
                 <div className="quote-line">TO LIFE.</div>
               </div>
 
-              {/* Lime Underline */}
+              {/* Logo Brown Underline */}
               <div
                 style={{
                   width: '42px',
                   height: '3px',
-                  backgroundColor: '#9cdd2e',
+                  backgroundColor: '#CAB796',
                   marginTop: '16px',
                   borderRadius: '2px',
-                  boxShadow: '0 0 15px rgba(156, 221, 46, 0.6)'
+                  boxShadow: '0 0 15px rgba(202, 183, 150, 0.6)'
                 }}
               />
             </div>
@@ -439,7 +439,7 @@ export default function FooterSection() {
                   flexShrink: 0
                 }}
               >
-                <Building2 size={20} color="#9cdd2e" />
+                <Building2 size={20} color="#CAB796" />
               </div>
               <div>
                 <div style={{ fontSize: 'clamp(1.6rem, 2.3vw, 2.2rem)', fontWeight: 900, lineHeight: 1, color: '#ffffff' }}>
@@ -475,7 +475,7 @@ export default function FooterSection() {
                   flexShrink: 0
                 }}
               >
-                <TrendingUp size={20} color="#9cdd2e" />
+                <TrendingUp size={20} color="#CAB796" />
               </div>
               <div>
                 <div style={{ fontSize: 'clamp(1.6rem, 2.3vw, 2.2rem)', fontWeight: 900, lineHeight: 1, color: '#ffffff' }}>
@@ -511,7 +511,7 @@ export default function FooterSection() {
                   flexShrink: 0
                 }}
               >
-                <Compass size={20} color="#9cdd2e" />
+                <Compass size={20} color="#CAB796" />
               </div>
               <div>
                 <div style={{ fontSize: 'clamp(1.6rem, 2.3vw, 2.2rem)', fontWeight: 900, lineHeight: 1, color: '#ffffff' }}>
@@ -545,7 +545,7 @@ export default function FooterSection() {
                   flexShrink: 0
                 }}
               >
-                <Star size={20} color="#9cdd2e" />
+                <Star size={20} color="#CAB796" />
               </div>
               <div>
                 <div style={{ fontSize: 'clamp(1.6rem, 2.3vw, 2.2rem)', fontWeight: 900, lineHeight: 1, color: '#ffffff' }}>
@@ -589,11 +589,11 @@ export default function FooterSection() {
                 width: '38px',
                 height: '38px',
                 borderRadius: '10px',
-                background: 'linear-gradient(135deg, #9cdd2e 0%, #4d7c0f 100%)',
+                background: 'linear-gradient(135deg, #CAB796 0%, #8c7350 100%)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '0 0 15px rgba(156, 221, 46, 0.3)'
+                boxShadow: '0 0 15px rgba(202, 183, 150, 0.3)'
               }}
             >
               <Compass size={20} color="#06070a" />
@@ -609,7 +609,7 @@ export default function FooterSection() {
                   textTransform: 'uppercase'
                 }}
               >
-                RUSTIC <span style={{ color: '#9cdd2e' }}>ARC</span>
+                RUSTIC <span style={{ color: '#CAB796' }}>ARC</span>
               </div>
               <div
                 style={{
@@ -644,7 +644,7 @@ export default function FooterSection() {
                     padding: '4px 0',
                     transition: 'color 0.25s ease'
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.color = '#9cdd2e'; }}
+                  onMouseEnter={(e) => { e.currentTarget.style.color = '#CAB796'; }}
                   onMouseLeave={(e) => { e.currentTarget.style.color = '#9ca3af'; }}
                 >
                   {item}
@@ -673,8 +673,8 @@ export default function FooterSection() {
             onMouseEnter={(e) => {
               const circle = e.currentTarget.querySelector('.top-arrow-circle');
               if (circle) {
-                circle.style.borderColor = '#9cdd2e';
-                circle.style.backgroundColor = '#9cdd2e';
+                circle.style.borderColor = '#CAB796';
+                circle.style.backgroundColor = '#CAB796';
                 circle.style.transform = 'translateY(-3px)';
               }
               const icon = e.currentTarget.querySelector('.top-arrow-icon');

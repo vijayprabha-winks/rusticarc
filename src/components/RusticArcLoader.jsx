@@ -294,8 +294,8 @@ export default function RusticArcLoader({ onComplete, autoExit = true }) {
                 width: '8px',
                 height: '8px',
                 borderRadius: '50%',
-                backgroundColor: '#9cdd2e',
-                boxShadow: '0 0 8px #9cdd2e'
+                backgroundColor: '#CAB796',
+                boxShadow: '0 0 8px #CAB796'
               }}
             />
             <span
@@ -404,12 +404,12 @@ export default function RusticArcLoader({ onComplete, autoExit = true }) {
             ))}
           </div>
 
-          {/* Word: ARC (Green #9cdd2e) */}
+          {/* Word: ARC (Logo Brown #CAB796) */}
           <div
             ref={arcWordRef}
             style={{
               display: 'inline-flex',
-              color: '#9cdd2e',
+              color: '#CAB796',
               transformStyle: 'preserve-3d',
               marginLeft: '0.04em'
             }}
@@ -422,7 +422,7 @@ export default function RusticArcLoader({ onComplete, autoExit = true }) {
                   display: 'inline-block',
                   transformOrigin: 'bottom center',
                   willChange: 'transform, opacity',
-                  textShadow: '0 8px 25px rgba(156, 221, 46, 0.25)'
+                  textShadow: '0 8px 25px rgba(202, 183, 150, 0.25)'
                 }}
               >
                 {char}
@@ -466,8 +466,8 @@ export default function RusticArcLoader({ onComplete, autoExit = true }) {
           style={{
             height: '100%',
             width: '0%',
-            backgroundColor: '#9cdd2e',
-            boxShadow: '0 0 10px rgba(156, 221, 46, 0.6)'
+            backgroundColor: '#CAB796',
+            boxShadow: '0 0 10px rgba(202, 183, 150, 0.6)'
           }}
         />
       </div>

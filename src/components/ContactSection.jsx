@@ -251,7 +251,7 @@ export default function ContactSection() {
           left: 0,
           right: 0,
           height: '1px',
-          background: 'linear-gradient(90deg, transparent 0%, rgba(156, 221, 46, 0.4) 50%, transparent 100%)'
+          background: 'linear-gradient(90deg, transparent 0%, rgba(202, 183, 150, 0.4) 50%, transparent 100%)'
         }}
       />
       <div
@@ -262,7 +262,7 @@ export default function ContactSection() {
           width: '550px',
           height: '550px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(156, 221, 46, 0.08) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(202, 183, 150, 0.08) 0%, transparent 70%)',
           pointerEvents: 'none',
           zIndex: 0
         }}
@@ -309,8 +309,8 @@ export default function ContactSection() {
                 className="headline-line"
                 style={{
                   display: 'block',
-                  color: '#9cdd2e',
-                  textShadow: '0 0 35px rgba(156, 221, 46, 0.25)'
+                  color: '#CAB796',
+                  textShadow: '0 0 35px rgba(202, 183, 150, 0.25)'
                 }}
               >
                 THAT MOVES.
@@ -367,7 +367,7 @@ export default function ContactSection() {
                 style={{
                   width: '42px',
                   height: '3px',
-                  background: '#9cdd2e',
+                  background: '#CAB796',
                   marginLeft: 'auto',
                   marginTop: '12px'
                 }}
@@ -385,7 +385,7 @@ export default function ContactSection() {
                 fontStyle: 'italic',
                 fontSize: 'clamp(2.4rem, 4.4vw, 4.4rem)',
                 color: 'transparent',
-                WebkitTextStroke: '1.5px #9cdd2e',
+                WebkitTextStroke: '1.5px #CAB796',
                 lineHeight: 1.05,
                 pointerEvents: 'none',
                 userSelect: 'none',
@@ -446,7 +446,7 @@ export default function ContactSection() {
                 >
                   SEND US A MESSAGE
                 </span>
-                <span style={{ width: '42px', height: '3px', background: '#9cdd2e', borderRadius: '2px' }} />
+                <span style={{ width: '42px', height: '3px', background: '#CAB796', borderRadius: '2px' }} />
               </div>
 
               <span
@@ -499,9 +499,9 @@ export default function ContactSection() {
                     boxSizing: 'border-box'
                   }}
                   onFocus={(e) => {
-                    e.target.style.borderColor = '#9cdd2e';
+                    e.target.style.borderColor = '#CAB796';
                     e.target.style.backgroundColor = '#ffffff';
-                    e.target.style.boxShadow = '0 0 0 4px rgba(156, 221, 46, 0.15)';
+                    e.target.style.boxShadow = '0 0 0 4px rgba(202, 183, 150, 0.15)';
                   }}
                   onBlur={(e) => {
                     e.target.style.borderColor = 'rgba(0, 0, 0, 0.08)';
@@ -546,9 +546,9 @@ export default function ContactSection() {
                       boxSizing: 'border-box'
                     }}
                     onFocus={(e) => {
-                      e.target.style.borderColor = '#9cdd2e';
+                      e.target.style.borderColor = '#CAB796';
                       e.target.style.backgroundColor = '#ffffff';
-                      e.target.style.boxShadow = '0 0 0 4px rgba(156, 221, 46, 0.15)';
+                      e.target.style.boxShadow = '0 0 0 4px rgba(202, 183, 150, 0.15)';
                     }}
                     onBlur={(e) => {
                       e.target.style.borderColor = 'rgba(0, 0, 0, 0.08)';
@@ -590,9 +590,9 @@ export default function ContactSection() {
                       boxSizing: 'border-box'
                     }}
                     onFocus={(e) => {
-                      e.target.style.borderColor = '#9cdd2e';
+                      e.target.style.borderColor = '#CAB796';
                       e.target.style.backgroundColor = '#ffffff';
-                      e.target.style.boxShadow = '0 0 0 4px rgba(156, 221, 46, 0.15)';
+                      e.target.style.boxShadow = '0 0 0 4px rgba(202, 183, 150, 0.15)';
                     }}
                     onBlur={(e) => {
                       e.target.style.borderColor = 'rgba(0, 0, 0, 0.08)';
@@ -635,9 +635,9 @@ export default function ContactSection() {
                     cursor: 'pointer'
                   }}
                   onFocus={(e) => {
-                    e.target.style.borderColor = '#9cdd2e';
+                    e.target.style.borderColor = '#CAB796';
                     e.target.style.backgroundColor = '#ffffff';
-                    e.target.style.boxShadow = '0 0 0 4px rgba(156, 221, 46, 0.15)';
+                    e.target.style.boxShadow = '0 0 0 4px rgba(202, 183, 150, 0.15)';
                   }}
                   onBlur={(e) => {
                     e.target.style.borderColor = 'rgba(0, 0, 0, 0.08)';
@@ -687,9 +687,9 @@ export default function ContactSection() {
                     boxSizing: 'border-box'
                   }}
                   onFocus={(e) => {
-                    e.target.style.borderColor = '#9cdd2e';
+                    e.target.style.borderColor = '#CAB796';
                     e.target.style.backgroundColor = '#ffffff';
-                    e.target.style.boxShadow = '0 0 0 4px rgba(156, 221, 46, 0.15)';
+                    e.target.style.boxShadow = '0 0 0 4px rgba(202, 183, 150, 0.15)';
                   }}
                   onBlur={(e) => {
                     e.target.style.borderColor = 'rgba(0, 0, 0, 0.08)';
@@ -707,7 +707,7 @@ export default function ContactSection() {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '12px',
-                    background: '#9cdd2e',
+                    background: '#CAB796',
                     color: '#06070a',
                     padding: '18px 36px',
                     borderRadius: '40px',
@@ -718,16 +718,16 @@ export default function ContactSection() {
                     textTransform: 'uppercase',
                     border: 'none',
                     cursor: 'pointer',
-                    boxShadow: '0 10px 30px rgba(156, 221, 46, 0.45)',
+                    boxShadow: '0 10px 30px rgba(202, 183, 150, 0.45)',
                     transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)';
-                    e.currentTarget.style.boxShadow = '0 15px 40px rgba(156, 221, 46, 0.65)';
+                    e.currentTarget.style.boxShadow = '0 15px 40px rgba(202, 183, 150, 0.65)';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                    e.currentTarget.style.boxShadow = '0 10px 30px rgba(156, 221, 46, 0.45)';
+                    e.currentTarget.style.boxShadow = '0 10px 30px rgba(202, 183, 150, 0.45)';
                   }}
                 >
                   <WhatsAppIcon size={20} color="#06070a" />
@@ -786,10 +786,10 @@ export default function ContactSection() {
                 >
                   GET IN TOUCH
                 </span>
-                <span style={{ width: '42px', height: '3px', background: '#9cdd2e', borderRadius: '2px' }} />
+                <span style={{ width: '42px', height: '3px', background: '#CAB796', borderRadius: '2px' }} />
               </div>
 
-              {/* Contact Rows List with Bright Lime Circular Icons */}
+              {/* Contact Rows List with Logo Brown Circular Icons */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
                 {/* 1. Email */}
                 <a
@@ -814,18 +814,18 @@ export default function ContactSection() {
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
-                    {/* Neon Lime Circular Icon Button */}
+                    {/* Logo Brown Circular Icon Button */}
                     <div
                       className="contact-icon-circle"
                       style={{
                         width: '54px',
                         height: '54px',
                         borderRadius: '50%',
-                        backgroundColor: '#9cdd2e',
+                        backgroundColor: '#CAB796',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        boxShadow: '0 0 25px rgba(156, 221, 46, 0.4)',
+                        boxShadow: '0 0 25px rgba(202, 183, 150, 0.4)',
                         flexShrink: 0
                       }}
                     >
@@ -889,11 +889,11 @@ export default function ContactSection() {
                         width: '54px',
                         height: '54px',
                         borderRadius: '50%',
-                        backgroundColor: '#9cdd2e',
+                        backgroundColor: '#CAB796',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        boxShadow: '0 0 25px rgba(156, 221, 46, 0.4)',
+                        boxShadow: '0 0 25px rgba(202, 183, 150, 0.4)',
                         flexShrink: 0
                       }}
                     >
@@ -946,11 +946,11 @@ export default function ContactSection() {
                         width: '54px',
                         height: '54px',
                         borderRadius: '50%',
-                        backgroundColor: '#9cdd2e',
+                        backgroundColor: '#CAB796',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        boxShadow: '0 0 25px rgba(156, 221, 46, 0.4)',
+                        boxShadow: '0 0 25px rgba(202, 183, 150, 0.4)',
                         flexShrink: 0
                       }}
                     >
@@ -1002,11 +1002,11 @@ export default function ContactSection() {
                         width: '54px',
                         height: '54px',
                         borderRadius: '50%',
-                        backgroundColor: '#9cdd2e',
+                        backgroundColor: '#CAB796',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        boxShadow: '0 0 25px rgba(156, 221, 46, 0.4)',
+                        boxShadow: '0 0 25px rgba(202, 183, 150, 0.4)',
                         flexShrink: 0
                       }}
                     >
@@ -1055,7 +1055,7 @@ export default function ContactSection() {
                 color: '#9ca3af'
               }}
             >
-              <CheckCircle2 size={16} color="#9cdd2e" />
+              <CheckCircle2 size={16} color="#CAB796" />
               <span>Turnkey Architecture, Interior & Construction Atelier</span>
             </div>
           </div>

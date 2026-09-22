@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Menu, X, MessageSquare, ArrowRight } from 'lucide-react';
+import logoImg from '../assets/logo 16_9.png';
 
 export default function Navbar({ onReplayLoader }) {
   const [activeSection, setActiveSection] = useState('home');
@@ -228,11 +229,28 @@ export default function Navbar({ onReplayLoader }) {
               ? '0 1px 3px rgba(0, 0, 0, 0.9), 0 2px 14px rgba(0, 0, 0, 0.85)'
               : 'none',
             cursor: 'pointer',
-            display: 'inline-block',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '12px',
             transition: 'color 0.35s ease, text-shadow 0.35s ease, opacity 0.2s ease'
           }}
         >
-          rustic Arc
+          <img
+            src={logoImg}
+            alt="Rustic Arc Logo"
+            style={{
+              height: 'clamp(30px, 2.4vw, 40px)',
+              width: 'auto',
+              maxHeight: '42px',
+              objectFit: 'contain',
+              borderRadius: '6px',
+              backgroundColor: isHeroSection ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
+              padding: isHeroSection ? '2px 5px' : '0',
+              boxShadow: isHeroSection ? '0 2px 8px rgba(0, 0, 0, 0.25)' : 'none',
+              transition: 'background-color 0.35s ease, box-shadow 0.35s ease'
+            }}
+          />
+          <span>rustic Arc</span>
         </a>
 
         {/* Desktop Navigation Links */}
@@ -250,9 +268,9 @@ export default function Navbar({ onReplayLoader }) {
 
             let itemColor;
             if (isHeroSection) {
-              itemColor = isHovered ? '#9cdd2e' : '#FFFFFF';
+              itemColor = isHovered ? '#CAB796' : '#FFFFFF';
             } else {
-              itemColor = isCurrent ? '#111215' : (isHovered ? '#8ac926' : '#374151');
+              itemColor = isCurrent ? '#111215' : (isHovered ? '#CAB796' : '#374151');
             }
 
             return (
@@ -283,7 +301,7 @@ export default function Navbar({ onReplayLoader }) {
               >
                 <span>{item.label}</span>
 
-                {/* Lime accent underline for current section */}
+                {/* Logo brown accent underline for current section */}
                 <span
                   style={{
                     position: 'absolute',
@@ -291,11 +309,11 @@ export default function Navbar({ onReplayLoader }) {
                     left: 0,
                     width: '100%',
                     height: '2.5px',
-                    backgroundColor: isHeroSection ? '#9cdd2e' : '#8ac926',
+                    backgroundColor: '#CAB796',
                     boxShadow: isCurrent
                       ? (isHeroSection
-                          ? '0 0 12px #9cdd2e, 0 0 24px rgba(156, 221, 46, 0.6)'
-                          : '0 2px 8px rgba(138, 201, 38, 0.4)')
+                          ? '0 0 12px #CAB796, 0 0 24px rgba(202, 183, 150, 0.6)'
+                          : '0 2px 8px rgba(202, 183, 150, 0.4)')
                       : 'none',
                     borderRadius: '2px',
                     transform: isCurrent ? 'scaleX(1)' : isHovered ? 'scaleX(0.5)' : 'scaleX(0)',
@@ -335,7 +353,7 @@ export default function Navbar({ onReplayLoader }) {
             }}
           >
             {isMobileMenuOpen ? (
-              <X size={22} color={isHeroSection ? '#9cdd2e' : '#8ac926'} />
+              <X size={22} color={isHeroSection ? '#CAB796' : '#CAB796'} />
             ) : (
               <Menu size={22} color={isHeroSection ? '#FFFFFF' : '#111215'} />
             )}
@@ -362,13 +380,13 @@ export default function Navbar({ onReplayLoader }) {
         >
           {/* Top Subtle Brand Tag */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '24px' }}>
-            <span style={{ width: '28px', height: '2px', backgroundColor: '#9cdd2e' }} />
+            <span style={{ width: '28px', height: '2px', backgroundColor: '#CAB796' }} />
             <span
               style={{
                 fontFamily: 'var(--font-mono, monospace)',
                 fontSize: '0.74rem',
                 letterSpacing: '0.18em',
-                color: '#9cdd2e',
+                color: '#CAB796',
                 textTransform: 'uppercase',
                 fontWeight: 700
               }}
@@ -404,7 +422,7 @@ export default function Navbar({ onReplayLoader }) {
                         fontFamily: 'var(--font-mono, monospace)',
                         fontSize: '0.82rem',
                         fontWeight: 700,
-                        color: isCurrent ? '#9cdd2e' : '#6b7280'
+                        color: isCurrent ? '#CAB796' : '#6b7280'
                       }}
                     >
                       {item.num}
@@ -414,7 +432,7 @@ export default function Navbar({ onReplayLoader }) {
                         fontFamily: "'Outfit', sans-serif",
                         fontSize: '1.85rem',
                         fontWeight: 800,
-                        color: isCurrent ? '#9cdd2e' : '#FFFFFF',
+                        color: isCurrent ? '#CAB796' : '#FFFFFF',
                         letterSpacing: '-0.02em',
                         transition: 'color 0.2s ease'
                       }}
@@ -429,8 +447,8 @@ export default function Navbar({ onReplayLoader }) {
                         width: '8px',
                         height: '8px',
                         borderRadius: '50%',
-                        backgroundColor: '#9cdd2e',
-                        boxShadow: '0 0 12px #9cdd2e'
+                        backgroundColor: '#CAB796',
+                        boxShadow: '0 0 12px #CAB796'
                       }}
                     />
                   )}
@@ -450,7 +468,7 @@ export default function Navbar({ onReplayLoader }) {
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '12px',
-                backgroundColor: '#9cdd2e',
+                backgroundColor: '#CAB796',
                 color: '#06070a',
                 padding: '14px 20px',
                 borderRadius: '14px',
@@ -459,7 +477,7 @@ export default function Navbar({ onReplayLoader }) {
                 fontSize: '0.96rem',
                 letterSpacing: '0.04em',
                 textDecoration: 'none',
-                boxShadow: '0 8px 25px rgba(156, 221, 46, 0.35)'
+                boxShadow: '0 8px 25px rgba(202, 183, 150, 0.35)'
               }}
             >
               <MessageSquare size={18} />

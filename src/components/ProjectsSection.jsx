@@ -38,7 +38,7 @@ const projectsData = [
     scope: 'Design + Build',
     area: '9,400 sq.ft.',
     year: '2025',
-    accentColor: '#9cdd2e',
+    accentColor: '#CAB796',
     coverImage: residentialVilla1,
     description: 'An architectural tour-de-force featuring an iconic 6-meter concrete cantilever, climate-responsive bronze louvers, and private infinity reflecting pool.',
     photos: [
@@ -108,7 +108,7 @@ const projectsData = [
     scope: 'Design + Build',
     area: '7,800 sq.ft.',
     year: '2024',
-    accentColor: '#9cdd2e',
+    accentColor: '#CAB796',
     coverImage: residentialVilla2,
     description: 'A contemplative modern dwelling centered around a Japanese zen maple courtyard, raw board-formed concrete walls, and seamless indoor-outdoor transitions.',
     photos: [
@@ -178,7 +178,7 @@ const projectsData = [
     scope: 'Design + Build',
     area: '11,200 sq.ft.',
     year: '2025',
-    accentColor: '#9cdd2e',
+    accentColor: '#CAB796',
     coverImage: design3dService,
     description: 'An expansive coastal modern luxury residence sculpted with floating slab balconies, recessed ocean-facing glass walls, and lush vertical garden screens.',
     photos: [
@@ -573,7 +573,7 @@ export default function ProjectsSection() {
           width: '50vw',
           height: '50vw',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(156, 221, 46, 0.06) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(202, 183, 150, 0.06) 0%, transparent 70%)',
           pointerEvents: 'none',
           zIndex: 0
         }}
@@ -607,11 +607,11 @@ export default function ProjectsSection() {
               fontFamily: 'var(--font-mono)',
               fontSize: '0.84rem',
               letterSpacing: '0.16em',
-              color: '#9cdd2e'
+              color: '#CAB796'
             }}
           >
             <span style={{ fontWeight: 800 }}>// 04</span>
-            <span style={{ width: '32px', height: '1px', background: '#9cdd2e' }} />
+            <span style={{ width: '32px', height: '1px', background: '#CAB796' }} />
             <span style={{ fontWeight: 700 }}>PORTFOLIO OF EXCELLENCE</span>
           </div>
 
@@ -636,7 +636,7 @@ export default function ProjectsSection() {
                   marginBottom: '12px'
                 }}
               >
-                SIGNATURE <span style={{ color: '#9cdd2e' }}>PROJECTS</span>
+                SIGNATURE <span style={{ color: '#CAB796' }}>PROJECTS</span>
               </h2>
               <p
                 className="project-header-subtitle"
@@ -681,7 +681,7 @@ export default function ProjectsSection() {
                       handleCategoryChange(cat);
                     }}
                     style={{
-                      background: isActive ? '#9cdd2e' : 'transparent',
+                      background: isActive ? '#CAB796' : 'transparent',
                       color: isActive ? '#06070a' : '#ffffff',
                       border: 'none',
                       borderRadius: '30px',
@@ -695,7 +695,7 @@ export default function ProjectsSection() {
                       display: 'flex',
                       alignItems: 'center',
                       gap: '8px',
-                      boxShadow: isActive ? '0 0 25px rgba(156, 221, 46, 0.45)' : 'none'
+                      boxShadow: isActive ? '0 0 25px rgba(202, 183, 150, 0.45)' : 'none'
                     }}
                   >
                     <span>{cat === 'All' ? 'All Projects' : cat}</span>
@@ -731,7 +731,7 @@ export default function ProjectsSection() {
         >
           {filteredProjects.map((project) => {
             const isResidential = project.category === 'Residential';
-            const themeColor = isResidential ? '#9cdd2e' : '#00f0ff';
+            const themeColor = isResidential ? '#CAB796' : '#00f0ff';
 
             return (
               <div

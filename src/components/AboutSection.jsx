@@ -31,7 +31,7 @@ export default function AboutSection() {
       logoSub: 'ARCHITECT',
       iconType: 'architect',
       descList: ['Master Site Planning', 'Cantilever Façades', 'Concept Zoning', 'Biophilic Living'],
-      themeColor: '#8ac926'
+      themeColor: '#CAB796'
     },
     {
       id: 'engineer',
@@ -438,7 +438,7 @@ export default function AboutSection() {
                 style={{
                   width: '32px',
                   height: '2.5px',
-                  backgroundColor: '#8ac926'
+                  backgroundColor: '#CAB796'
                 }}
               />
               <span
@@ -526,16 +526,16 @@ export default function AboutSection() {
                   height: '56px',
                   borderRadius: '50%',
                   background: '#FFFFFF',
-                  border: '2px solid #8ac926',
+                  border: '2px solid #CAB796',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  boxShadow: '0 6px 20px rgba(138, 201, 38, 0.25)',
+                  boxShadow: '0 6px 20px rgba(202, 183, 150, 0.25)',
                   transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'scale(1.1)';
-                  e.currentTarget.style.backgroundColor = '#8ac926';
+                  e.currentTarget.style.backgroundColor = '#CAB796';
                   const icon = e.currentTarget.querySelector('svg');
                   if (icon) icon.style.fill = '#FFFFFF';
                 }}
@@ -579,7 +579,7 @@ export default function AboutSection() {
                 width: '100%',
                 height: '100%',
                 borderRadius: '24px',
-                background: 'radial-gradient(circle at 50% 40%, rgba(138, 201, 38, 0.12), transparent 70%)',
+                background: 'radial-gradient(circle at 50% 40%, rgba(202, 183, 150, 0.12), transparent 70%)',
                 pointerEvents: 'none'
               }}
             />
@@ -600,7 +600,7 @@ export default function AboutSection() {
                   fontFamily: "'Caveat', cursive",
                   fontSize: 'clamp(1.8rem, 2.4vw, 2.3rem)',
                   fontWeight: 700,
-                  color: '#8ac926',
+                  color: '#CAB796',
                   lineHeight: 1.05,
                   textShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
                   letterSpacing: '0.02em',
@@ -616,7 +616,7 @@ export default function AboutSection() {
               <svg width="70" height="24" viewBox="0 0 70 24" fill="none" style={{ marginTop: '-4px', transform: 'rotate(-4deg)' }}>
                 <path
                   d="M4 14C22 6 48 8 66 18M54 22C59 20 66 18 66 18M66 18C64 12 62 7 60 4"
-                  stroke="#8ac926"
+                  stroke="#CAB796"
                   strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -678,7 +678,7 @@ export default function AboutSection() {
                   fontFamily: "'Cinzel', 'Playfair Display', Georgia, serif",
                   fontSize: '3.6rem',
                   fontWeight: 900,
-                  color: '#8ac926',
+                  color: '#CAB796',
                   lineHeight: 0.8,
                   marginBottom: '14px'
                 }}
@@ -707,7 +707,7 @@ export default function AboutSection() {
                 className="about-signature-block"
                 style={{
                   paddingTop: '12px',
-                  borderTop: '1px solid rgba(138, 201, 38, 0.35)'
+                  borderTop: '1px solid rgba(202, 183, 150, 0.35)'
                 }}
               >
                 <div
@@ -774,7 +774,7 @@ export default function AboutSection() {
                 style={{
                   width: '2px',
                   height: '38px',
-                  backgroundColor: '#8ac926',
+                  backgroundColor: '#CAB796',
                   marginBottom: '20px'
                 }}
               />
@@ -912,7 +912,7 @@ export default function AboutSection() {
                 style={{
                   width: '32px',
                   height: '2px',
-                  backgroundColor: '#8ac926'
+                  backgroundColor: '#CAB796'
                 }}
               />
             </div>
@@ -938,7 +938,7 @@ export default function AboutSection() {
                   className="about-group-word"
                   style={{
                     display: 'block',
-                    color: '#8ac926'
+                    color: '#CAB796'
                   }}
                 >
                   MULTIPLE POSITIONS.
@@ -1008,12 +1008,12 @@ export default function AboutSection() {
                       {card.iconType === 'architect' && (
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-                            <Compass size={20} color="#8ac926" />
+                            <Compass size={20} color="#CAB796" />
                             <span style={{ fontWeight: 900, fontSize: '0.96rem', letterSpacing: '0.08em', color: '#FFFFFF', fontFamily: "'Outfit', sans-serif" }}>
                               BARATHAN
                             </span>
                           </div>
-                          <span style={{ fontSize: '0.66rem', fontWeight: 800, color: '#8ac926', letterSpacing: '0.16em', fontFamily: 'var(--font-mono, monospace)' }}>
+                          <span style={{ fontSize: '0.66rem', fontWeight: 800, color: '#CAB796', letterSpacing: '0.16em', fontFamily: 'var(--font-mono, monospace)' }}>
                             ARCHITECT
                           </span>
                         </div>
@@ -1200,7 +1200,7 @@ export default function AboutSection() {
                 transition: 'all 0.2s ease'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#8ac926';
+                e.currentTarget.style.backgroundColor = '#CAB796';
                 e.currentTarget.style.color = '#000000';
               }}
               onMouseLeave={(e) => {
@@ -1241,7 +1241,7 @@ export default function AboutSection() {
                 <div style={{ fontWeight: 800, fontSize: '1.05rem', color: '#FFFFFF' }}>
                   Barathan — Founder Story
                 </div>
-                <div style={{ color: '#8ac926', fontSize: '0.84rem', fontWeight: 600 }}>
+                <div style={{ color: '#CAB796', fontSize: '0.84rem', fontWeight: 600 }}>
                   Architectural Vision. Engineered Precision.
                 </div>
               </div>

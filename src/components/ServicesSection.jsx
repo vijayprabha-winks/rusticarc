@@ -472,7 +472,7 @@ export default function ServicesSection() {
                 style={{
                   width: '36px',
                   height: '2.5px',
-                  backgroundColor: '#8ac926'
+                  backgroundColor: '#CAB796'
                 }}
               />
             </div>
@@ -509,7 +509,7 @@ export default function ServicesSection() {
                   className="service-word"
                   style={{
                     display: 'block',
-                    color: '#8ac926'
+                    color: '#CAB796'
                   }}
                 >
                   ELEVATION
@@ -635,7 +635,7 @@ export default function ServicesSection() {
                   style={{
                     width: '24px',
                     height: '2px',
-                    backgroundColor: '#8ac926',
+                    backgroundColor: '#CAB796',
                     marginTop: '6px'
                   }}
                 />
@@ -678,7 +678,7 @@ export default function ServicesSection() {
                 style={{
                   width: '28px',
                   height: '2px',
-                  backgroundColor: '#8ac926',
+                  backgroundColor: '#CAB796',
                   marginBottom: '20px'
                 }}
               />
@@ -715,14 +715,14 @@ export default function ServicesSection() {
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.transform = 'translateX(4px)';
-                      e.currentTarget.style.color = '#8ac926';
+                      e.currentTarget.style.color = '#CAB796';
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.transform = 'translateX(0)';
                       e.currentTarget.style.color = '#2d3139';
                     }}
                   >
-                    <span style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#8ac926' }} />
+                    <span style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#CAB796' }} />
                     <span>{tag}</span>
                   </div>
                 ))}
@@ -771,7 +771,7 @@ export default function ServicesSection() {
                   style={{
                     width: '18px',
                     height: '2px',
-                    backgroundColor: '#8ac926',
+                    backgroundColor: '#CAB796',
                     marginTop: '4px'
                   }}
                 />
@@ -782,7 +782,7 @@ export default function ServicesSection() {
 
         {/* ===================================================================
             ARCHITECTURAL BIM & ENGINEERING SPECIFICATIONS (Animated GSAP Counters)
-           =================================================================== */}
+            =================================================================== */}
         <div
           ref={statsRef}
           className="resp-grid-stats-4"
@@ -821,7 +821,7 @@ export default function ServicesSection() {
                   fontSize: 'clamp(2rem, 3vw, 2.6rem)',
                   fontWeight: 900,
                   letterSpacing: '-0.02em',
-                  color: '#8ac926',
+                  color: '#CAB796',
                   lineHeight: 1.1,
                   marginBottom: '6px'
                 }}
@@ -922,7 +922,7 @@ export default function ServicesSection() {
                     width: '6px',
                     height: '6px',
                     borderRadius: '50%',
-                    backgroundColor: '#8ac926'
+                    backgroundColor: '#CAB796'
                   }}
                 />
                 <span>{text}</span>
@@ -986,7 +986,7 @@ export default function ServicesSection() {
                         fontFamily: 'var(--font-mono, monospace)',
                         fontSize: '0.86rem',
                         fontWeight: 800,
-                        color: isHovered ? '#8ac926' : '#717682',
+                        color: isHovered ? '#CAB796' : '#717682',
                         transition: 'color 0.25s ease'
                       }}
                     >
@@ -996,7 +996,7 @@ export default function ServicesSection() {
                       style={{
                         width: isHovered ? '42px' : '28px',
                         height: '2px',
-                        backgroundColor: isHovered ? '#8ac926' : '#d1d5db',
+                        backgroundColor: isHovered ? '#CAB796' : '#d1d5db',
                         transition: 'width 0.3s ease, background-color 0.25s ease'
                       }}
                     />
@@ -1070,7 +1070,7 @@ export default function ServicesSection() {
                             width: '4px',
                             height: '4px',
                             borderRadius: '50%',
-                            backgroundColor: isHovered ? '#8ac926' : '#9ca3af',
+                            backgroundColor: isHovered ? '#CAB796' : '#9ca3af',
                             transition: 'background-color 0.2s ease',
                             flexShrink: 0
                           }}
@@ -1095,13 +1095,13 @@ export default function ServicesSection() {
                       width: '38px',
                       height: '38px',
                       borderRadius: '50%',
-                      border: isHovered ? '1.5px solid #8ac926' : '1.5px solid #d1d5db',
-                      background: isHovered ? '#8ac926' : 'transparent',
+                      border: isHovered ? '1.5px solid #CAB796' : '1.5px solid #d1d5db',
+                      background: isHovered ? '#CAB796' : 'transparent',
                       color: isHovered ? '#FFFFFF' : '#111215',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      boxShadow: isHovered ? '0 4px 14px rgba(138, 201, 38, 0.4)' : 'none',
+                      boxShadow: isHovered ? '0 4px 14px rgba(202, 183, 150, 0.4)' : 'none',
                       transition: 'all 0.25s ease',
                       transform: isHovered ? 'translateX(5px) rotate(45deg)' : 'translateX(0) rotate(0deg)'
                     }}
@@ -1185,7 +1185,7 @@ export default function ServicesSection() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
-                color: '#8ac926',
+                color: '#CAB796',
                 fontWeight: 800,
                 fontSize: '0.82rem',
                 letterSpacing: '0.14em',
@@ -1258,7 +1258,7 @@ export default function ServicesSection() {
                     color: '#111215'
                   }}
                 >
-                  <CheckCircle2 size={16} color="#8ac926" />
+                  <CheckCircle2 size={16} color="#CAB796" />
                   <span>{line}</span>
                 </div>
               ))}
@@ -1274,7 +1274,7 @@ export default function ServicesSection() {
                 width: '100%',
                 padding: '14px',
                 borderRadius: '50px',
-                background: '#8ac926',
+                background: '#CAB796',
                 color: '#06070a',
                 border: 'none',
                 fontWeight: 800,
@@ -1290,7 +1290,7 @@ export default function ServicesSection() {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 8px 24px rgba(138, 201, 38, 0.4)';
+                e.currentTarget.style.boxShadow = '0 8px 24px rgba(202, 183, 150, 0.4)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'translateY(0)';
