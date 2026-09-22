@@ -701,7 +701,7 @@ export default function ServicesSection() {
                   'INTERIORS',
                   '3D ELEVATION',
                   'CONSTRUCTION',
-                  'RUSTIC ARC ATELIER'
+                  'RUSTIC ARC'
                 ].map((tag, tIdx) => (
                   <div
                     key={tIdx}
@@ -892,7 +892,7 @@ export default function ServicesSection() {
               'Acoustic Fluted Cedar',
               'Turnkey Construction Delivery',
               'Passive Biophilic Living',
-              'Rustic Arc Atelier Studio'
+              'Rustic Arc Studio'
             ].concat([
               'Bespoke Villa Architecture',
               'Floating Cantilever Elevations',
@@ -901,7 +901,7 @@ export default function ServicesSection() {
               'Acoustic Fluted Cedar',
               'Turnkey Construction Delivery',
               'Passive Biophilic Living',
-              'Rustic Arc Atelier Studio'
+              'Rustic Arc Studio'
             ]).map((text, mIdx) => (
               <div
                 key={mIdx}

@@ -79,7 +79,7 @@ export default function ContactSection() {
       `🏛️ *Project Type:* ${typeText}\n\n` +
       `💬 *Vision / Scope:*\n${msgText}\n` +
       `━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-      `Sent via Rustic Arc Atelier Portal`;
+      `Sent via Rustic Arc Portal`;
 
     const encodedMsg = encodeURIComponent(formattedText);
     const waUrl = `https://wa.me/91${WHATSAPP_NUMBER}?text=${encodedMsg}`;

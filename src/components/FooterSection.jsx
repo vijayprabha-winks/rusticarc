@@ -737,7 +737,7 @@ export default function FooterSection() {
           }}
         >
           <div>
-            © 2026 Rustic Arc Atelier. All rights reserved.
+            © 2026 Rustic Arc. All rights reserved.
           </div>
           <div>
             Crafted for Visionary Architecture & Bespoke Living Spaces.
