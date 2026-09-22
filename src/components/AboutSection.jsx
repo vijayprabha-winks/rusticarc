@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Play, X, ArrowRight, MessageCircle, Compass, Building2, HardHat, Box } from 'lucide-react';
+import { Play, X, ArrowRight, Compass, Building2, HardHat, Box } from 'lucide-react';
 import barathanImg from '../assets/Barathan.jpeg';
 import heroVideo from '../assets/Cinematic_Hero_Video_Prompt_.mp4';
 
@@ -1108,43 +1108,6 @@ export default function AboutSection() {
           </div>
         </div>
       </div>
-
-      {/* ===================================================================
-          FLOATING WHATSAPP BUTTON (Matches Reference Screenshot Bottom-Right)
-         =================================================================== */}
-      <a
-        href="https://wa.me/"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Contact on WhatsApp"
-        style={{
-          position: 'fixed',
-          bottom: '28px',
-          right: '28px',
-          zIndex: 90,
-          width: '54px',
-          height: '54px',
-          borderRadius: '50%',
-          backgroundColor: '#25D366',
-          boxShadow: '0 8px 24px rgba(37, 211, 102, 0.45)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: '#FFFFFF',
-          textDecoration: 'none',
-          transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = 'scale(1.12) translateY(-2px)';
-          e.currentTarget.style.boxShadow = '0 12px 30px rgba(37, 211, 102, 0.6)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = 'scale(1) translateY(0)';
-          e.currentTarget.style.boxShadow = '0 8px 24px rgba(37, 211, 102, 0.45)';
-        }}
-      >
-        <MessageCircle size={28} />
-      </a>
 
       {/* ===================================================================
           INTERACTIVE STORY VIDEO LIGHTBOX MODAL

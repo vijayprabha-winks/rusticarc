@@ -11,6 +11,8 @@ import ServicesSection from './components/ServicesSection';
 import ProjectsSection from './components/ProjectsSection';
 import ContactSection from './components/ContactSection';
 import FooterSection from './components/FooterSection';
+import FloatingActions from './components/FloatingActions';
+import BuildingEstimatorPage from './components/BuildingEstimatorPage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,8 +20,24 @@ export default function App() {
   const [showLoader, setShowLoader] = useState(true);
   const [loaderKey, setLoaderKey] = useState(0);
   const [isGlowActive] = useState(true);
+  const [currentView, setCurrentView] = useState(() => {
+    return window.location.hash.includes('estimate') ? 'estimation' : 'home';
+  });
 
   const lenisRef = useRef(null);
+
+  // Sync currentView with hash changes (browser back/forward button support)
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash.includes('estimate')) {
+        setCurrentView('estimation');
+      } else {
+        setCurrentView('home');
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   // Initialize Lenis smooth scroll and synchronize with GSAP ScrollTrigger
   useEffect(() => {
@@ -56,6 +74,17 @@ export default function App() {
     };
   }, []);
 
+  // Handle scroll reset and refresh when changing views
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true });
+    }
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
+  }, [currentView]);
+
   // Lock scroll during intro loader
   useEffect(() => {
     if (showLoader) {
@@ -80,6 +109,18 @@ export default function App() {
   const handleReplayLoader = () => {
     setShowLoader(true);
     setLoaderKey((k) => k + 1);
+  };
+
+  const handleOpenEstimator = () => {
+    window.location.hash = 'estimate';
+    setCurrentView('estimation');
+  };
+
+  const handleBackToHome = () => {
+    if (window.location.hash.includes('estimate')) {
+      history.pushState('', document.title, window.location.pathname + window.location.search);
+    }
+    setCurrentView('home');
   };
 
   return (
@@ -120,29 +161,42 @@ export default function App() {
         />
       )}
 
-      {/* Main Navigation Bar */}
-      <Navbar onReplayLoader={handleReplayLoader} />
+      {/* View Routing */}
+      {currentView === 'estimation' ? (
+        /* Standalone Building Estimation Calculator Page (NO NAVBAR / HEADER - BACK BUTTON ONLY) */
+        <BuildingEstimatorPage onBack={handleBackToHome} />
+      ) : (
+        /* Main Landing Page */
+        <>
+          {/* Main Navigation Bar */}
+          <Navbar onReplayLoader={handleReplayLoader} />
 
-      {/* Main Content */}
-      <main>
-        {/* Cinematic Video Hero */}
-        <CinematicHeroSection isLoaderActive={showLoader} />
+          {/* Main Content */}
+          <main>
+            {/* Cinematic Video Hero */}
+            <CinematicHeroSection isLoaderActive={showLoader} />
 
-        {/* Dedicated About Section (Founder Showcase & The Group) */}
-        <AboutSection />
+            {/* Dedicated About Section (Founder Showcase & The Group) */}
+            <AboutSection />
 
-        {/* Dedicated White Service Section (Architecture, Interior, 3D Design, Construction) */}
-        <ServicesSection />
+            {/* Dedicated White Service Section (Architecture, Interior, 3D Design, Construction) */}
+            <ServicesSection />
 
-        {/* Dedicated 4. PROJECTS Section (Residential & Commercial with Horizontal Photo Gallery) */}
-        <ProjectsSection />
+            {/* Dedicated 4. PROJECTS Section (Residential & Commercial with Horizontal Photo Gallery) */}
+            <ProjectsSection />
 
-        {/* Dedicated 5. CONTACT Section (Dual-card layout & direct WhatsApp integration to 7825915899) */}
-        <ContactSection />
+            {/* Dedicated 5. CONTACT Section (Dual-card layout & direct WhatsApp integration to 7825915899) */}
+            <ContactSection />
 
-        {/* 6. Cinematic Architectural FOOTER Section */}
-        <FooterSection />
-      </main>
+            {/* 6. Cinematic Architectural FOOTER Section */}
+            <FooterSection />
+          </main>
+
+          {/* Floating Actions: Authentic WhatsApp & Building Estimation Calculator */}
+          <FloatingActions onOpenEstimator={handleOpenEstimator} />
+        </>
+      )}
     </div>
   );
 }
+
