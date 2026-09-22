@@ -57,6 +57,32 @@ export default function FloatingActions({ onOpenEstimator }) {
           pointerEvents: 'auto'
         }}
       >
+        {/* Continuous Glowing Radar Ripple Waves */}
+        <span
+          className="cost-ripple-wave cost-ripple-1"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            borderRadius: '50%',
+            pointerEvents: 'none',
+            border: '2px solid rgba(202, 183, 150, 0.75)',
+            boxShadow: '0 0 18px rgba(202, 183, 150, 0.5)',
+            animation: 'costPulseWave 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite'
+          }}
+        />
+        <span
+          className="cost-ripple-wave cost-ripple-2"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            borderRadius: '50%',
+            pointerEvents: 'none',
+            border: '1.5px solid rgba(247, 231, 206, 0.65)',
+            boxShadow: '0 0 24px rgba(202, 183, 150, 0.4)',
+            animation: 'costPulseWave 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite 1.2s'
+          }}
+        />
+
         {/* Hover Tooltip Pill */}
         <span
           style={{
@@ -64,7 +90,7 @@ export default function FloatingActions({ onOpenEstimator }) {
             right: '66px',
             backgroundColor: 'rgba(10, 13, 20, 0.94)',
             color: '#CAB796',
-            border: '1px solid rgba(202, 183, 150, 0.3)',
+            border: '1px solid rgba(202, 183, 150, 0.35)',
             padding: '7px 14px',
             borderRadius: '24px',
             fontFamily: 'var(--font-mono, monospace)',
@@ -72,7 +98,7 @@ export default function FloatingActions({ onOpenEstimator }) {
             fontWeight: 800,
             letterSpacing: '0.08em',
             whiteSpace: 'nowrap',
-            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4)',
+            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4), 0 0 14px rgba(202, 183, 150, 0.25)',
             pointerEvents: 'none',
             opacity: hoveredBtn === 'estimator' ? 1 : 0,
             transform: hoveredBtn === 'estimator' ? 'translateX(0)' : 'translateX(8px)',
@@ -88,35 +114,50 @@ export default function FloatingActions({ onOpenEstimator }) {
           onMouseEnter={() => setHoveredBtn('estimator')}
           onMouseLeave={() => setHoveredBtn(null)}
           aria-label="Calculate Building Estimation"
+          className="cost-glowing-btn"
           style={{
             width: '56px',
             height: '56px',
             borderRadius: '50%',
-            backgroundColor: '#11141c',
-            border: '1.5px solid #CAB796',
+            backgroundColor: '#0e1118',
+            border: '2px solid #CAB796',
             color: '#CAB796',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
             cursor: 'pointer',
-            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.5), 0 0 16px rgba(202, 183, 150, 0.25)',
-            transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-            transform: hoveredBtn === 'estimator' ? 'scale(1.12) translateY(-2px)' : 'scale(1) translateY(0)',
-            position: 'relative'
+            position: 'relative',
+            zIndex: 2,
+            transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+            transform: hoveredBtn === 'estimator' ? 'scale(1.14) translateY(-2px)' : 'scale(1) translateY(0)',
+            animation: 'continuousCostGlow 2.2s ease-in-out infinite'
           }}
         >
-          <Calculator size={22} color="#CAB796" strokeWidth={2.2} />
           <span
+            className="cost-icon-glow"
             style={{
-              fontSize: '0.52rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              animation: 'continuousCostIconGlow 2.2s ease-in-out infinite'
+            }}
+          >
+            <Calculator size={22} color="#CAB796" strokeWidth={2.3} />
+          </span>
+
+          <span
+            className="cost-text-glow"
+            style={{
+              fontSize: '0.54rem',
               fontWeight: 900,
               fontFamily: 'var(--font-mono, monospace)',
-              letterSpacing: '0.06em',
+              letterSpacing: '0.08em',
               lineHeight: 1,
               marginTop: '2px',
               color: '#CAB796',
-              textTransform: 'uppercase'
+              textTransform: 'uppercase',
+              animation: 'continuousCostTextGlow 2.2s ease-in-out infinite'
             }}
           >
             COST
@@ -131,13 +172,73 @@ export default function FloatingActions({ onOpenEstimator }) {
               width: '12px',
               height: '12px',
               borderRadius: '50%',
-              backgroundColor: '#CAB796',
+              backgroundColor: '#f5deb3',
               border: '2px solid #06070a',
-              boxShadow: '0 0 8px #CAB796'
+              boxShadow: '0 0 10px #CAB796, 0 0 16px rgba(202, 183, 150, 0.8)',
+              animation: 'costBadgePing 1.8s ease-in-out infinite'
             }}
           />
         </button>
       </div>
+
+      {/* Global Embedded Styles for Continuous Glow Keyframes */}
+      <style>{`
+        @keyframes continuousCostGlow {
+          0%, 100% {
+            box-shadow: 0 0 12px rgba(202, 183, 150, 0.4), 0 0 24px rgba(202, 183, 150, 0.2), 0 8px 24px rgba(0, 0, 0, 0.6);
+            border-color: rgba(202, 183, 150, 0.85);
+          }
+          50% {
+            box-shadow: 0 0 28px rgba(202, 183, 150, 0.95), 0 0 54px rgba(202, 183, 150, 0.6), 0 0 80px rgba(202, 183, 150, 0.35), 0 10px 30px rgba(0, 0, 0, 0.8);
+            border-color: #fff1d6;
+          }
+        }
+
+        @keyframes continuousCostIconGlow {
+          0%, 100% {
+            filter: drop-shadow(0 0 2px rgba(202, 183, 150, 0.4));
+          }
+          50% {
+            filter: drop-shadow(0 0 8px rgba(255, 241, 214, 0.95)) drop-shadow(0 0 14px rgba(202, 183, 150, 0.8));
+          }
+        }
+
+        @keyframes continuousCostTextGlow {
+          0%, 100% {
+            color: #CAB796;
+            text-shadow: 0 0 4px rgba(202, 183, 150, 0.5);
+          }
+          50% {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 241, 214, 1), 0 0 18px rgba(202, 183, 150, 0.9);
+          }
+        }
+
+        @keyframes costPulseWave {
+          0% {
+            transform: scale(0.95);
+            opacity: 0.9;
+          }
+          60% {
+            opacity: 0.35;
+          }
+          100% {
+            transform: scale(1.68);
+            opacity: 0;
+          }
+        }
+
+        @keyframes costBadgePing {
+          0%, 100% {
+            transform: scale(1);
+            box-shadow: 0 0 8px #CAB796;
+          }
+          50% {
+            transform: scale(1.3);
+            box-shadow: 0 0 16px #f7e7ce, 0 0 24px rgba(202, 183, 150, 0.9);
+          }
+        }
+      `}</style>
 
       {/* 2. Authentic WhatsApp Floating Action Button */}
       <div

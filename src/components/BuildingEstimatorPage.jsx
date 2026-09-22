@@ -1119,14 +1119,15 @@ I would like to discuss this project and schedule an architectural consultation.
             className="estimator-right-pane"
           >
             <div
+              className="estimator-summary-card"
               style={{
                 backgroundColor: '#0a0d15',
-                border: '1.5px solid rgba(202, 183, 150, 0.4)',
+                border: '1.5px solid rgba(202, 183, 150, 0.45)',
                 borderRadius: '24px',
                 padding: 'clamp(24px, 3.5vw, 36px)',
-                boxShadow: '0 20px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(202, 183, 150, 0.12)',
                 position: 'relative',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                animation: 'continuousCardGlow 2.8s ease-in-out infinite'
               }}
             >
               {/* Header Badge */}
@@ -1146,27 +1147,54 @@ I would like to discuss this project and schedule an architectural consultation.
                 <span style={{ fontSize: '0.74rem', color: '#9ca3af' }}>{location}</span>
               </div>
 
-              {/* Huge Total Figure */}
+              {/* Huge Total Figure with Continuous Glowing Animation */}
               <div style={{ marginBottom: '24px' }}>
                 <div style={{ fontSize: '0.82rem', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>
                   Total Estimated Turnkey Budget
                 </div>
                 <div
+                  className="continuous-cost-figure"
                   style={{
                     fontFamily: "'Outfit', sans-serif",
                     fontSize: 'clamp(2.5rem, 4vw, 3.6rem)',
                     fontWeight: 900,
                     color: '#FFFFFF',
                     lineHeight: 1.05,
-                    letterSpacing: '-0.03em'
+                    letterSpacing: '-0.03em',
+                    animation: 'continuousCostFigureGlow 2.6s ease-in-out infinite'
                   }}
                 >
                   {formatIndianCurrency(calculations.totalEstimatedBudget)}
                 </div>
-                <div style={{ fontSize: '0.88rem', color: '#CAB796', fontWeight: 700, marginTop: '4px' }}>
-                  Approx. ₹{formatExactNumber(calculations.totalEffectiveRatePerSqFt)} / sq.ft turnkey
+                <div style={{ fontSize: '0.88rem', color: '#CAB796', fontWeight: 700, marginTop: '6px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#CAB796', boxShadow: '0 0 8px #CAB796' }} />
+                  <span>Approx. ₹{formatExactNumber(calculations.totalEffectiveRatePerSqFt)} / sq.ft turnkey</span>
                 </div>
               </div>
+
+              <style>{`
+                @keyframes continuousCardGlow {
+                  0%, 100% {
+                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 24px rgba(202, 183, 150, 0.18);
+                    border-color: rgba(202, 183, 150, 0.4);
+                  }
+                  50% {
+                    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.8), 0 0 45px rgba(202, 183, 150, 0.42), 0 0 70px rgba(202, 183, 150, 0.2);
+                    border-color: rgba(247, 231, 206, 0.8);
+                  }
+                }
+
+                @keyframes continuousCostFigureGlow {
+                  0%, 100% {
+                    text-shadow: 0 0 10px rgba(202, 183, 150, 0.35);
+                    color: #FFFFFF;
+                  }
+                  50% {
+                    text-shadow: 0 0 25px rgba(247, 231, 206, 0.9), 0 0 45px rgba(202, 183, 150, 0.7);
+                    color: #fffaf0;
+                  }
+                }
+              `}</style>
 
               {/* Metrics Quick Strip */}
               <div
